@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"path"
 
-	"github.com/coreos/pkg/flagutil"
+	"github.com/chenzhiwei/electd/pkg/utils"
 )
 
 var options struct {
@@ -32,7 +33,10 @@ func main() {
 		return
 	}
 
-	flagutil.SetFlagsFromEnv(electdFlags, "ELECTD")
+	err := utils.SetEnvFlags(electdFlags, "ELECTD")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println(options)
 }
